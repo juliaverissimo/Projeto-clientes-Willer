@@ -38,7 +38,11 @@ app.post("/pessoas", async (req, res) => {
 });
 
 app.get("/pessoas", async (req, res) => {
-    const pessoas = await prisma.pessoas.findMany();
+    const pessoas = await prisma.pessoas.findMany({
+        include: {
+            cpf: true
+        }
+    });
 
     res.json(pessoas);
 });
